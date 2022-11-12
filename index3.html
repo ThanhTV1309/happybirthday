@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Latest compiled and minified CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <title>Happy Birthday</title>
+  </head>
+  <body style="background-color: black">
+    <div class="row mt-5">
+      <div class="col-lg-2"></div>
+      <div class="col-lg-8 text-center">
+        <div id="typedtext" style="color: #ccc; font-size: 1rem"></div>
+      </div>
+      <div class="col-lg-2"></div>
+    </div>
+    <div class="row mt-1">
+      <div class="col-lg-2"></div>
+      <div class="col-lg-8">
+        <div class="text-center" id="buttonPlace"></div>
+        <div class="row my-5">
+          <div class="col-lg-4" id="gift1" style="display: none">
+            <div
+              class="card bg-dark text-white text-center"
+              style="width: 300px"
+            >
+              <img class="card-img-top" src="./gift1.png" alt="Card image" />
+              <div class="card-body">
+                <h4 class="card-title">Quà</h4>
+                <p class="card-text"></p>
+                <button
+                  type="button"
+                  data-bs-toggle="modal"
+                  data-bs-target="#myModal"
+                  class="btn btn-danger"
+                >
+                  Chọn Quà
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4" id="gift2" style="display: none">
+            <div
+              class="card bg-dark text-white text-center"
+              style="width: 300px"
+            >
+              <img class="card-img-top" src="./gift2.png" alt="Card image" />
+              <div class="card-body">
+                <h4 class="card-title">X TR</h4>
+                <p class="card-text"> </p>
+                <button
+                  type="button"
+                  data-bs-toggle="modal"
+                  data-bs-target="#myModal2"
+                  class="btn btn-danger"
+                >
+                  Chọn Quà
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4" id="gift3" style="display: none">
+            <div
+              class="card bg-dark text-white text-center"
+              style="width: 300px"
+            >
+              <img class="card-img-top" src="./gift3.png" alt="Card image" />
+              <div class="card-body">
+                <h4 class="card-title">Du Lịch</h4>
+                <p class="card-text"></p>
+                <button
+                  type="button"
+                  data-bs-toggle="modal"
+                  data-bs-target="#myModal3"
+                  class="btn btn-danger"
+                >
+                  Chọn Quà
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2"></div>
+    </div>
+    <!-- The Modal -->
+    <div class="modal" id="myModal">
+      <div class="modal-dialog modal-dialog-centered modal-lg modal-fade">
+        <div class="modal-content">
+          <div class="modal-body">
+            <img src="./gift1.png" width="100%" alt="">
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal" id="myModal2">
+        <div class="modal-dialog modal-dialog-centered modal-lg modal-fade">
+          <div class="modal-content">
+            <div class="modal-body">
+              <img src="./gift2.png" width="100%" alt="">
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal" id="myModal3">
+        <div class="modal-dialog modal-dialog-centered modal-lg modal-fade">
+          <div class="modal-content">
+            <div class="modal-body">
+              <img src="./gift3.png" width="100%" alt="">
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <script>
+      function showGift() {
+        document.getElementById("gift1").style.display = "block";
+        document.getElementById("gift2").style.display = "block";
+        document.getElementById("gift3").style.display = "block";
+      }
+    </script>
+    <script>
+      var aText = new Array(
+        "Cà phê đắng thì không thể thiếu đường và sữa", // Cú pháp của 1 hàng chữ  " text ",
+        "Anh và các con thì không thể không có em.", // sử dụng ký tự gây lỗi trong câu thì thêm \ đằng trc ký tự vd: " \"Hello\" "
+        "Tình yêu là bên nhau vui vẻ,",
+        "Lặng yên khi trờ đầy giông bão",
+        "Em yên tâm, bố con anh vẫn ở đây,",
+        "Vẵn sẽ nắm tay em đi hết con đường này.",
+        "Chúc em có 1 ngày sinh nhật thật vui vẻ nha.",
+        "Vk iu!",
+        "",
+        "Giờ vk hãy chọn cho mình 1 món quà nha. ",
+        "Hãy nhớ thời hạn chỉ có 1 ngày thui nha." // Hàng cuối kh cần , ở cuối dòng
+      );
+      var iSpeed = 0; // Tốc độ chạy từng chữ 1000 = 1s
+      var iIndex = 0; // Vị trí hàng bắt đầu chạy
+      var iArrLength = aText[0].length;
+      var iScrollAt = 20;
+      var iTextPos = 0;
+      var sContents = "";
+      var iRow;
+      var flag = true;
+
+      function typewriter() {
+        sContents = " ";
+        iRow = Math.max(0, iIndex - iScrollAt);
+        var destination = document.getElementById("typedtext");
+
+        while (iRow < iIndex) {
+          sContents += aText[iRow++] + "<br />";
+        }
+        destination.innerHTML =
+          sContents + aText[iIndex].substring(0, iTextPos) + "_";
+        if (iTextPos++ == iArrLength) {
+          iTextPos = 0;
+          iIndex++;
+          if (iIndex != aText.length) {
+            iArrLength = aText[iIndex].length;
+            setTimeout("typewriter()", 500);
+          }
+        } else {
+          setTimeout("typewriter()", iSpeed);
+        }
+
+        if (iRow == aText.length - 1 && flag) {
+          console.log("done");
+          flag = false;
+          document.getElementById(
+            "buttonPlace"
+          ).innerHTML = `<button class="btn btn-outline-danger" id="btnOpenGift" onclick="showGift()">Mở quà</button> `;
+        }
+      }
+
+      typewriter();
+    </script>
+  </body>
+</html>
